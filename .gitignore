@@ -43,3 +43,10 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Shop Project
+backend/venv/
+backend/app/auth.env
+backend/.env
+.env
+businesssuiteapp/build/
