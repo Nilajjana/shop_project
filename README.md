@@ -1,4 +1,4 @@
-# Shop Suite — POS, Billing & Inventory Management
+# ShopSphere — POS, Billing & Inventory Management
 
 A self-hostable Point-of-Sale system for small shops, combining a **Flutter mobile app** (frontend) with a **FastAPI + PostgreSQL backend**. The backend is designed to be run locally (e.g., on a shop's PC or a Raspberry Pi) or deployed to a server/website, with staff using the mobile app to connect to it over a network. The app speeds up day-to-day shop operations with **QR code scanning** for product recognition and **voice recognition** for hands-free customer name entry and search.
 
@@ -28,7 +28,7 @@ A self-hostable Point-of-Sale system for small shops, combining a **Flutter mobi
 
 ## Overview
 
-Shop Suite is designed for shop owners who want a fast billing and inventory solution they can run themselves — whether that's on a machine inside the shop (local network only, no internet dependency) or on a server/website for remote access. Staff interact with the system through a **mobile app**, which talks to the **backend API**.
+ShopSphere is designed for shop owners who want a fast billing and inventory solution they can run themselves — whether that's on a machine inside the shop (local network only, no internet dependency) or on a server/website for remote access. Staff interact with the system through a **mobile app**, which talks to the **backend API**.
 
 The app is split into three main modules:
 
