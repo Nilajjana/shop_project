@@ -3,7 +3,10 @@ from fastapi.params import Body
 from pydantic import BaseModel
 from typing import List
 import psycopg2
-from psycopg2.extras import RealDictCursor 
+from psycopg2.extras import RealDictCursor
+
+
+
 
 while True:
     try:
@@ -14,15 +17,16 @@ while True:
     except Exception as error:
         print("connection to database was unsuccessful")
         print("Error: ",error)
+        time.sleep(2)
 
-app=FastAPI()
 
 
-@app.get("/post")
+@app.get("/")
 def root():
     return{"message": "Hello World"}
 
-@app.post("/post")
-def create_posts(new_post:Post):
-    print(new_post)
-    return{"data":"new post" }
+@app.get("/sqlalchemy")
+def test_posts(db:Session =Depends(get_db)):
+    posts=db.query(models.Post).all()
+    return{"data": }
+
