@@ -1,32 +1,35 @@
 from fastapi import FastAPI
-from fastapi.params import Body
-from pydantic import BaseModel
-from typing import List
 import psycopg2
 from psycopg2.extras import RealDictCursor
+import time
 
 
 
+from config import (
+    DB_HOST,
+    DB_PORT,
+    DB_NAME,
+    DB_USER,
+    DB_PASSWORD
+)
+
+app=FastAPI()
 
 while True:
     try:
-        conn =psycopg2.connect(host='localhost',database='inventory_db',user='postgres',password='nila416@###',cursor_factory=RealDictCursor)
-        cursor=conn.cursor()
+        conn = psycopg2.connect( host=DB_HOST,
+                                 port=DB_PORT, 
+                                 database=DB_NAME, 
+                                 user=DB_USER, 
+                                 password=DB_PASSWORD, 
+                                 cursor_factory=RealDictCursor )
         print("Database connection was successful")
         break
     except Exception as error:
-        print("connection to database was unsuccessful")
-        print("Error: ",error)
+        print("Connection to database was successful")
+        print("Error:",error)
         time.sleep(2)
-
-
 
 @app.get("/")
 def root():
-    return{"message": "Hello World"}
-
-@app.get("/sqlalchemy")
-def test_posts(db:Session =Depends(get_db)):
-    posts=db.query(models.Post).all()
-    return{"data": }
-
+    return {"message":"hello WOrld"}
