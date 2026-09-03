@@ -47,6 +47,4 @@ app.*.map.json
 # Shop Project
 backend/venv/
 backend/app/auth.env
-backend/.env
-.env
 businesssuiteapp/build/
