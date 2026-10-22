@@ -4,7 +4,7 @@ from sqlalchemy.orm import sessionmaker
 from config import DB_CONFIG
 
 url = URL.create(
-    "pstgresql+psycopg2",
+    "postgresql+psycopg2",
     username=DB_CONFIG["user"],password=DB_CONFIG["password"],
     host=DB_CONFIG["host"],port=int(DB_CONFIG["port"]),
     database=DB_CONFIG["dbname"],
