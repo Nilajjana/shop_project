@@ -5,4 +5,4 @@ app = FastAPI()
 
 @app.get("/")
 def root():
-    return {"message": "ShopSphere API is running"}
+    return {"message": "Shopsphere API is running"}
