@@ -1,10 +1,10 @@
 import jwt 
 from fastapi import Depends, HTTPException
-from fastapi.security import HTTPbearer
+from fastapi.security import HTTPBearer
 from sqlalchemy import text
 from database import get_db
 from auth.security import decode_access_token
-bearer = HTTPbearer()
+bearer = HTTPBearer()
 def get_current_user(creds=Depends(bearer), db=Depends(get_db)):
     try:
         payload = decode_access_token(creds.cedentials)
