@@ -16,7 +16,8 @@ class StaffUpdate(BaseModel):
 
 class ResetPassword(BaseModel):
     new_password: str = Field(min_length=8)
-    class StaffOut(BaseModel):
+    
+class StaffOut(BaseModel):
         staff_uid:int
         staff_name:str
         username:Optional[str]
