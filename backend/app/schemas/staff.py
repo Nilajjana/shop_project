@@ -3,6 +3,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 class StaffCreate(BaseModel):
     model_config= ConfigDict(str_strip_whiltespace=True)
+    staff_name: str=Field(min_length=4,max_length=50)
     username: str=Field(min_length=3,max_length=50)
     password: str=Field(min_length=8)
     role: Literal["manager", "salesperson"]
@@ -16,7 +17,7 @@ class StaffUpdate(BaseModel):
 
 class ResetPassword(BaseModel):
     new_password: str = Field(min_length=8)
-    
+
 class StaffOut(BaseModel):
         staff_uid:int
         staff_name:str

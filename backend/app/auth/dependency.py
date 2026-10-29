@@ -7,12 +7,12 @@ from auth.security import decode_access_token
 bearer = HTTPBearer()
 def get_current_user(creds=Depends(bearer), db=Depends(get_db)):
     try:
-        payload = decode_access_token(creds.cedentials)
+        payload = decode_access_token(creds.credentials)
         uid = int(payload["sub"])
     except (jwt.PyJWTError, KeyError,ValueError):
         raise HTTPException(401,"Invalid or epired token")
     row= db.execute(
-        text("Select staff_uid,staff_name, role FROM staff"
+        text("Select staff_uid,staff_name, role FROM staff "
              "WHERE staff_uid=:i and is_active"),
              {"i": uid},
     ).mappings().first()

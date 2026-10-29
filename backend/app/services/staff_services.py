@@ -19,7 +19,7 @@ def _refuse_if_admin(target: dict):
 
 def create_staff(db, data)->dict:
     try:
-        row=db.execute(text("INSERT INTO STAFF (staff_name, role,is_active, usernamer, password_hash)"
+        row=db.execute(text("INSERT INTO STAFF (staff_name, role,is_active, username, password_hash)"
                             "VALUES (:n,:r,:u,:p)"
                             f"RETURNING {COLUMNS}"
                             ),
@@ -37,11 +37,11 @@ def create_staff(db, data)->dict:
     return dict(row)
 
 def list_staff(db, include_inactive: bool =True)-> list[dict]:
-    query=f"SELECT {COLUMNS} FROM staff"
+    query=f"SELECT {COLUMNS} FROM staff "
     if not include_inactive:
-        query+= "WHERE is_active"
+        query+= "WHERE is_active "
         query += " ORDER BY staff_uid "
-        return [dict(r) for r in db.execute(text(query)).mappings().all()]
+    return [dict(r) for r in db.execute(text(query)).mappings().all()]
 
 def get_staff(db, staff_uid: int)-> dict:
     return _get_staff_or_404(db,staff_uid)
@@ -55,7 +55,7 @@ def update_staff(db, staff_uid: int, data)->dict:
     set_clause =", ".join(f"{col} = :{col}" for col in changes)
     row = db.execute(
         text(f"UPDATE staff SET {set_clause} WHERE staff_uid = :uid RETURNING {COLUMNS}"),
-        {**changes, "uid": staff_uid},
+        {**changes, " uid ": staff_uid},
     ).mappings().first()
     db.commit()
     return dict(row)
