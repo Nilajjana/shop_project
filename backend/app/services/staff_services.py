@@ -20,12 +20,13 @@ def _refuse_if_admin(target: dict):
 def create_staff(db, data)->dict:
     try:
         row=db.execute(text("INSERT INTO STAFF (staff_name, role,is_active, username, password_hash)"
-                            "VALUES (:n,:r,:u,:p)"
+                            "VALUES (:n,:r,:ia,:u,:p)"
                             f"RETURNING {COLUMNS}"
                             ),
                             {
                                 "n":data.staff_name,
                                 "r":data.role,
+                                "ia":True,
                                 "u":data.username,
                                 "p":hash_password(data.password),
                             },
@@ -55,7 +56,7 @@ def update_staff(db, staff_uid: int, data)->dict:
     set_clause =", ".join(f"{col} = :{col}" for col in changes)
     row = db.execute(
         text(f"UPDATE staff SET {set_clause} WHERE staff_uid = :uid RETURNING {COLUMNS}"),
-        {**changes, " uid ": staff_uid},
+        {**changes, "uid": staff_uid},
     ).mappings().first()
     db.commit()
     return dict(row)
