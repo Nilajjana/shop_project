@@ -50,7 +50,9 @@ def get_staff(db, staff_uid: int)-> dict:
 def update_staff(db, staff_uid: int, data)->dict:
     target = _get_staff_or_404(db, staff_uid)
     _refuse_if_admin(target)
-    changes={k: v for k, v in  data.model_dump() if v is not None }
+    
+    changes = data.model_dump(exclude_unset=True)
+
     if not changes:
         raise HTTPException(400, "Nothing to update")
     set_clause =", ".join(f"{col} = :{col}" for col in changes)
