@@ -22,3 +22,5 @@ def me(user=Depends(get_current_user)):
 @router.post("/change-password",status_code=204)
 def change_password(body:ChangePasswordRequest,db=Depends(get_db),user=Depends(get_current_user)):
     ok=authservices.change_password(db, user["staff_uid"], body.current_password,body.new_password)
+    if not ok:
+        raise HTTPException(400,"Current password is incorrect")
