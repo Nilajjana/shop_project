@@ -16,7 +16,7 @@ def login(body: LoginRequest, db=Depends(get_db)):
 @router.get("/me", response_model=CurrentUser)
 def me(user=Depends(get_current_user)):
     return user
-router.get("/me",response_model=CurrentUser)
+@router.get("/me",response_model=CurrentUser)
 def me(user=Depends(get_current_user)):
     return user
 @router.post("/change-password",status_code=204)

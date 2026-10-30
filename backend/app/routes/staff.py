@@ -8,7 +8,7 @@ router = APIRouter(prefix="/staff", tags=["staff"])
 admin_only = require_role("admin")
 
 @router.post("", response_model=StaffOut, status_code=201)
-def create_staff(body: StaffCreate, db=Depends(get_db),uder=Depends(admin_only)):
+def create_staff(body: StaffCreate, db=Depends(get_db),user=Depends(admin_only)):
     return staff_services.create_staff(db,body)
 
 @router.get("", response_model=list[StaffOut])

@@ -41,7 +41,7 @@ def list_staff(db, include_inactive: bool =True)-> list[dict]:
     query=f"SELECT {COLUMNS} FROM staff "
     if not include_inactive:
         query+= "WHERE is_active "
-        query += " ORDER BY staff_uid "
+    query += " ORDER BY staff_uid "
     return [dict(r) for r in db.execute(text(query)).mappings().all()]
 
 def get_staff(db, staff_uid: int)-> dict:
@@ -50,7 +50,7 @@ def get_staff(db, staff_uid: int)-> dict:
 def update_staff(db, staff_uid: int, data)->dict:
     target = _get_staff_or_404(db, staff_uid)
     _refuse_if_admin(target)
-    
+
     changes = data.model_dump(exclude_unset=True)
 
     if not changes:

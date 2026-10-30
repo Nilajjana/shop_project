@@ -19,7 +19,7 @@ def change_password(db, staff_uid: int,current_password: str,new_password:str) -
              {"i": staff_uid},).mappings().first()
     if row is None or not row["password_hash"]:
         return False
-    if not verify_password(current_password,row["passsword_hash"]):
+    if not verify_password(current_password,row["password_hash"]):
         return False
     db.execute(text("UPDATE staff SET password_hash = :p WHERE staff_uid = :i"),
                {"p": hash_password(new_password),"i":staff_uid},
