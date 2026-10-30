@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from pydantic import Field
 class LoginRequest(BaseModel):
     username: str
     password: str
@@ -11,3 +12,8 @@ class CurrentUser(BaseModel):
     staff_uid: int
     staff_name: str
     role: str
+
+class ChangePasswordRequest(BaseModel):
+    current_password: str
+    new_password: str = Field(min_length=8)
+    

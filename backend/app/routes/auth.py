@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from database import get_db
 from auth.dependency import get_current_user
-from schemas.auth import LoginRequest, TokenResponse, CurrentUser
+from schemas.auth import LoginRequest, TokenResponse, CurrentUser,ChangePasswordRequest
 from services import authservices
 
 router = APIRouter(prefix="/auth", tags=["auth"])
@@ -16,3 +16,9 @@ def login(body: LoginRequest, db=Depends(get_db)):
 @router.get("/me", response_model=CurrentUser)
 def me(user=Depends(get_current_user)):
     return user
+router.get("/me",response_model=CurrentUser)
+def me(user=Depends(get_current_user)):
+    return user
+@router.post("/change-password",status_code=204)
+def change_password(body:ChangePasswordRequest,db=Depends(get_db),user=Depends(get_current_user)):
+    ok=authservices.change_password(db, user["staff_uid"], body.current_password,body.new_password)
